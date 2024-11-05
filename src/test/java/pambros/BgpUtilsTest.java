@@ -103,7 +103,6 @@ public class BgpUtilsTest
 		assertEquals("111 333 444 777", it.next());
     }
 
-
 	@Test
     public void testMultipleAsnGroupRepeatingAsns()
     {
@@ -116,6 +115,20 @@ public class BgpUtilsTest
 		assertEquals("111 333 444 555 888", it.next());
 		assertEquals("111 333 444 888", it.next());
 		assertEquals("111 333 444 777 888", it.next());
+    }
+
+	@Test
+    public void testJustMultipleAsnGroup()
+    {
+    	final Collection<String> paths = toTest.parse("{111,222}{222,333,444}");
+		assertEquals(6, paths.size());
+		final Iterator<String> it = paths.iterator();
+		assertEquals("111 222", it.next());
+		assertEquals("111 333", it.next());
+		assertEquals("111 444", it.next());
+		assertEquals("222", it.next());
+		assertEquals("222 333", it.next());
+		assertEquals("222 444", it.next());
     }
 
 }
